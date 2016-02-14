@@ -1,6 +1,6 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-const SpriteAnimator = require('../lib/').default
+const SpriteAnimator = require('../lib/')
 
 class Sprite extends React.Component {
   constructor (props) {

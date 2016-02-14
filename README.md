@@ -2,6 +2,8 @@
 
 This is a component that animates through a image sprite.
 
+- [Twitter Heart Example](http://react-sprite-animator.surge.sh/)
+
 ### Install
 
     $ npm i react-sprite-animator -S
