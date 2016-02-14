@@ -34,6 +34,9 @@
     "eslint-plugin-react": "^3.16.1",
     "react": "^0.14.7"
   },
+  "files": [
+    "src/index.js"
+  ],
   "babel": {
     "presets": [
       "es2015",

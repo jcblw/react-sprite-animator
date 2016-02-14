@@ -124,4 +124,4 @@ class SpriteAnimator extends Component {
 SpriteAnimator.propTypes = propTypes
 SpriteAnimator.defaultProps = defaultProps
 
-export default SpriteAnimator
+module.exports = SpriteAnimator
