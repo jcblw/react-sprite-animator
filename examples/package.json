@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify index.js -t babelify -o bundle.js",
-    "publish": "npm run build && surge ."
+    "publish": "npm run build && echo 'react-sprite-animator.surge.sh' > ./CNAME && surge ."
   },
   "author": "",
   "license": "ISC",
