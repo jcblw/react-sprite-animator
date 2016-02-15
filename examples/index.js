@@ -22,9 +22,9 @@ class Sprite extends React.Component {
       <div onClick={this.onClick}>
         <SpriteAnimator
           ref='sprite'
-          width={100}
-          height={100}
-          sprite='./heart.png'
+          width={36}
+          height={36}
+          sprite='./heart.svg'
           shouldAnimate={isLiked}
           timeout={20}
           startFrame={0}

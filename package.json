@@ -1,6 +1,6 @@
 {
   "name": "react-sprite-animator",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A react component that loads sprite image and the runs it as an animation",
   "main": "lib/index.js",
   "scripts": {
@@ -25,14 +25,16 @@
   },
   "homepage": "https://github.com/jcblw/react-sprite-animator#readme",
   "dependencies": {
+    "react": "^0.14.7"
+  },
+  "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.5.2",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
-    "eslint-plugin-react": "^3.16.1",
-    "react": "^0.14.7"
+    "eslint-plugin-react": "^3.16.1"
   },
   "files": [
     "src/index.js"
