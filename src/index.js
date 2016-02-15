@@ -1,5 +1,10 @@
-import React, {PropTypes, Component} from 'react'
+'use strict'
+
+const React = require('react')
+const {PropTypes, Component} = React
+const noop = () => {}
 const propTypes = {
+  className: PropTypes.className,
   width: PropTypes.number,
   height: PropTypes.number,
   sprite: PropTypes.string,
@@ -8,14 +13,20 @@ const propTypes = {
   loop: PropTypes.bool,
   startFrame: PropTypes.number,
   timeout: PropTypes.number,
-  stopLastFrame: PropTypes.bool
+  stopLastFrame: PropTypes.bool,
+  onError: PropTypes.func,
+  onLoad: PropTypes.func,
+  onEnd: PropTypes.func
 }
 const defaultProps = {
   direction: 'horizontal',
   shouldAnimate: true,
   loop: true,
   startFrame: 0,
-  timeout: 100
+  timeout: 100,
+  onError: noop,
+  onLoad: noop,
+  onEnd: noop
 }
 
 class SpriteAnimator extends Component {
@@ -38,15 +49,17 @@ class SpriteAnimator extends Component {
   }
 
   loadSprite () {
-    const {sprite, width, height, direction} = this.props
+    const {sprite, width, height, direction, onError, onLoad} = this.props
     const {isLoaded, hasErrored} = this.state
     if (!isLoaded && !hasErrored) {
       SpriteAnimator.loadImage(sprite, (err, image) => {
         if (err) {
+          onError(err)
           // dont trigger update
           this.state.hasErrored = true
           return
         }
+        onLoad()
         this.setState({
           isLoaded: true,
           maxFrames: Math.floor(direction === 'horizontal' ?
@@ -67,11 +80,13 @@ class SpriteAnimator extends Component {
       return this.loadSprite()
     }
 
-    const {shouldAnimate, timeout, stopLastFrame} = this.props
+    const {shouldAnimate, timeout, stopLastFrame, onEnd} = this.props
     if (shouldAnimate) {
       const {maxFrames, currentFrame} = this.state
       const nextFrame = currentFrame + 1 >= maxFrames ? 0 : currentFrame + 1
-      if (nextFrame === 0 && stopLastFrame) return
+      if (nextFrame === 0 && stopLastFrame) {
+        return onEnd()
+      }
       setTimeout(() => {
         if (!this.props.shouldAnimate) return
         this.setState({currentFrame: nextFrame})
@@ -82,7 +97,7 @@ class SpriteAnimator extends Component {
   componentWillReceiveProps ({sprite, reset, startFrame}) {
     const {sprite: lastSprite} = this.props
     const newState = {}
-    if (sprite === lastSprite) {
+    if (sprite !== lastSprite) {
       newState.isLoaded = false
       newState.hasErrored = false
     }
@@ -107,7 +122,7 @@ class SpriteAnimator extends Component {
   }
 
   render () {
-    const {sprite, width, height} = this.props
+    const {sprite, width, height, className} = this.props
     const {isLoaded, currentFrame} = this.state
     const blockStyle = isLoaded ? {
       backgroundImage: `url(${sprite})`,
@@ -116,7 +131,7 @@ class SpriteAnimator extends Component {
       height: `${height}px`
     } : null
     return (
-      <div style={blockStyle}></div>
+      <div className={className} style={blockStyle}></div>
     )
   }
 }

@@ -18,9 +18,12 @@
         "browser": true
     },
     "extends": "eslint:recommended",
-    "ecmaFeatures": {
-        "modules": true,
-        "jsx": true
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "modules": true,
+          "jsx": true
+        }
     },
     "plugins": [
         "react"
