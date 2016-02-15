@@ -24,7 +24,7 @@
     "url": "https://github.com/jcblw/react-sprite-animator/issues"
   },
   "homepage": "https://github.com/jcblw/react-sprite-animator#readme",
-  "dependencies": {
+  "peerDependencies": {
     "react": "^0.14.7"
   },
   "devDependencies": {
@@ -37,7 +37,7 @@
     "eslint-plugin-react": "^3.16.1"
   },
   "files": [
-    "src/index.js"
+    "lib/index.js"
   ],
   "babel": {
     "presets": [
