@@ -4,7 +4,7 @@ const React = require('react')
 const {PropTypes, Component} = React
 const noop = () => {}
 const propTypes = {
-  className: PropTypes.className,
+  className: PropTypes.string,
   width: PropTypes.number,
   height: PropTypes.number,
   sprite: PropTypes.string,
