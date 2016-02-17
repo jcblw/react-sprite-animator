@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/RadPad/react-sprite-animator.svg?branch=master)](https://travis-ci.org/RadPad/react-sprite-animator)
 
-This is a component that animates through a image sprite.
+This is a component that animates through a image sprite. ![go padman go](https://raw.githubusercontent.com/RadPad/react-sprite-animator/master/examples/padman-go.gif)
 
 - [Animated Heart Example](http://react-sprite-animator.surge.sh/)
 
