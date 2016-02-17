@@ -2,9 +2,12 @@
 
 [![Build Status](https://travis-ci.org/RadPad/react-sprite-animator.svg?branch=master)](https://travis-ci.org/RadPad/react-sprite-animator)
 
-This is a component that animates through a image sprite. ![go padman go](https://raw.githubusercontent.com/RadPad/react-sprite-animator/master/examples/padman-go.gif)
+This is a component that animates through a image sprite. 
 
-- [Animated Heart Example](http://react-sprite-animator.surge.sh/)
+- [Animated Heart Example](http://react-sprite-animator.surge.sh/) 
+
+<img src='https://raw.githubusercontent.com/RadPad/react-sprite-animator/master/examples/padman-go.gif' width='120px' height='134px'>
+
 
 ### Install
 
