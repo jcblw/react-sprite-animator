@@ -124,12 +124,12 @@ class SpriteAnimator extends Component {
   render () {
     const {sprite, width, height, className} = this.props
     const {isLoaded, currentFrame} = this.state
-    const blockStyle = isLoaded ? {
-      backgroundImage: `url(${sprite})`,
-      backgroundPosition: this.getSpritePosition(currentFrame, this.props),
+    const blockStyle = {
+      backgroundImage: isLoaded ? `url(${sprite})` : null,
+      backgroundPosition: isLoaded ? this.getSpritePosition(currentFrame, this.props) : null,
       width: `${width}px`,
       height: `${height}px`
-    } : null
+    }
     return (
       <div className={className} style={blockStyle}></div>
     )
