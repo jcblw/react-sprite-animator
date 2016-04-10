@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/jcblw/react-sprite-animator#readme",
   "peerDependencies": {
-    "react": "^0.14.*"
+    "react": "0.13.x || 0.14.x || ^15.0.0-0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -37,7 +37,7 @@
     "browserify": "^13.0.0",
     "eslint": "^2.0.0",
     "eslint-plugin-react": "^3.16.1",
-    "react-addons-test-utils": "^0.14.7",
+    "react-addons-test-utils": "^15.0.1",
     "tape": "^4.4.0",
     "tape-run": "^2.1.3"
   },
