@@ -37,6 +37,7 @@ class SpriteAnimator extends Component {
       currentFrame: props.startFrame
     }
     this.prevTime = 0
+    this.unmounting = false
     this.animate = this.animate.bind(this)
   }
 
@@ -101,6 +102,10 @@ class SpriteAnimator extends Component {
   }
 
   animate (nextFrame, time) {
+    if (this.unmounting) {
+      return
+    }
+
     if (!this.prevTime) {
       this.prevTime = time
     }
@@ -129,6 +134,7 @@ class SpriteAnimator extends Component {
   }
 
   componentWillUnmount () {
+    this.unmounting = true
     this.animationId !== null && raf.cancel(this.animationId)
   }
 
