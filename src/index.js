@@ -114,7 +114,7 @@ class SpriteAnimator extends Component {
   }
 
   getSpritePosition (frame = 0, options = {}) {
-    const {direction, width, height, scale} = options
+    const {direction, width, height, scale = 1} = options
     const isHorizontal = direction === 'horizontal'
     const _width = (isHorizontal ?  width * frame : 0) / scale
     const _height = (!isHorizontal ? height * frame : 0) / scale
