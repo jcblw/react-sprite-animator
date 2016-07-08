@@ -31,5 +31,5 @@ This is a component that animates through an image sprite.
 - direction **{string}** - horizontal/vertical
 - shouldAnimate **{bool}** - if the sprite should animate
 - startFrame **{number}** - the frame to start animation
-- timeout **{number}** - the amount of millisecond between frame
+- fps **{number}** - the frame rate (frames per second) target
 - stopLastFrame **{bool}** - stops animation from looping
