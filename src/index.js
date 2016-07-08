@@ -16,7 +16,9 @@ const propTypes = {
   stopLastFrame: PropTypes.bool,
   onError: PropTypes.func,
   onLoad: PropTypes.func,
-  onEnd: PropTypes.func
+  onEnd: PropTypes.func,
+  columns: PropTypes.number,
+  frameCount: PropTypes.number
 }
 const defaultProps = {
   direction: 'horizontal',
@@ -49,7 +51,7 @@ class SpriteAnimator extends Component {
   }
 
   loadSprite () {
-    const {sprite, width, height, direction, onError, onLoad} = this.props
+    const {sprite, width, height, direction, onError, onLoad, frameCount} = this.props
     const {isLoaded, hasErrored} = this.state
     if (!isLoaded && !hasErrored) {
       SpriteAnimator.loadImage(sprite, (err, image) => {
@@ -62,7 +64,7 @@ class SpriteAnimator extends Component {
         onLoad()
         this.setState({
           isLoaded: true,
-          maxFrames: Math.floor(direction === 'horizontal' ?
+          maxFrames: frameCount || Math.floor(direction === 'horizontal' ?
             image.width / width :
             image.height / height
           )
@@ -108,11 +110,20 @@ class SpriteAnimator extends Component {
   }
 
   getSpritePosition (frame = 0, options = {}) {
-    const {direction, width, height} = options
+    const {direction, width, height, wrapAfter} = options
     const isHorizontal = direction === 'horizontal'
-    const _width = isHorizontal ?  width * frame : 0
-    const _height = !isHorizontal ? height * frame : 0
-    return `${!_width ? _width : `-${_width}`}px ${!_height ?  _height : `-${_height}`}px`
+
+    let row, col
+    if (typeof wrapAfter === 'undefined') {
+      row = isHorizontal ? 0 : frame
+      col = isHorizontal ? frame : 0
+    } else {
+      row = isHorizontal ? Math.floor(frame / wrapAfter) : frame % wrapAfter
+      col = isHorizontal ? frame % wrapAfter : Math.floor(frame / wrapAfter)
+    }
+    const _width = -width * col
+    const _height = -height * row
+    return `${_width}px ${_height}px`
   }
 
   reset () {
