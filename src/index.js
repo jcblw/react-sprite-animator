@@ -17,8 +17,8 @@ const propTypes = {
   onError: PropTypes.func,
   onLoad: PropTypes.func,
   onEnd: PropTypes.func,
-  columns: PropTypes.number,
-  frameCount: PropTypes.number
+  frameCount: PropTypes.number,
+  wrapAfter: PropTypes.number
 }
 const defaultProps = {
   direction: 'horizontal',

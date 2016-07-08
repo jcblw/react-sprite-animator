@@ -33,3 +33,8 @@ This is a component that animates through an image sprite.
 - startFrame **{number}** - the frame to start animation
 - timeout **{number}** - the amount of millisecond between frame
 - stopLastFrame **{bool}** - stops animation from looping
+
+**Only required for two-dimensional sprites**
+
+- frameCount **{number}** - the total frame count of the sprite
+- wrapAfter **{number}** - the row or column count of the sprite (direction: "horizontal" -> columns, "vertical" -> rows)
