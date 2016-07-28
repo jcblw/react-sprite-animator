@@ -1,6 +1,6 @@
 {
   "name": "react-sprite-animator",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "description": "A react component that loads sprite image and the runs it as an animation",
   "main": "lib/index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/jcblw/react-sprite-animator#readme",
   "peerDependencies": {
-    "react": "0.13.x || 0.14.x || ^15.0.0-0"
+    "react": "0.13.x || 0.14.x || ^15.x"
   },
   "devDependencies": {
     "babel": "^6.5.2",
