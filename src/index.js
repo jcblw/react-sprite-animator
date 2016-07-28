@@ -2,6 +2,7 @@
 
 const React = require('react')
 const {PropTypes, Component} = React
+const raf = require('raf')
 const noop = () => {}
 const propTypes = {
   className: PropTypes.string,
@@ -12,7 +13,7 @@ const propTypes = {
   shouldAnimate: PropTypes.bool,
   loop: PropTypes.bool,
   startFrame: PropTypes.number,
-  timeout: PropTypes.number,
+  fps: PropTypes.number,
   stopLastFrame: PropTypes.bool,
   onError: PropTypes.func,
   onLoad: PropTypes.func,
@@ -23,7 +24,7 @@ const defaultProps = {
   shouldAnimate: true,
   loop: true,
   startFrame: 0,
-  timeout: 100,
+  fps: 60,
   onError: noop,
   onLoad: noop,
   onEnd: noop
@@ -35,6 +36,9 @@ class SpriteAnimator extends Component {
     this.state = {
       currentFrame: props.startFrame
     }
+    this.prevTime = 0
+    this.unmounting = false
+    this.animate = this.animate.bind(this)
   }
 
   static loadImage (url = '', callback = () => {}) {
@@ -80,18 +84,40 @@ class SpriteAnimator extends Component {
       return this.loadSprite()
     }
 
-    const {shouldAnimate, timeout, stopLastFrame, onEnd} = this.props
+    const {shouldAnimate, fps, stopLastFrame, onEnd} = this.props
     if (shouldAnimate) {
       const {maxFrames, currentFrame} = this.state
       const nextFrame = currentFrame + 1 >= maxFrames ? 0 : currentFrame + 1
+
+      if (!shouldAnimate) {
+        return
+      }
       if (nextFrame === 0 && stopLastFrame) {
         return onEnd()
       }
-      setTimeout(() => {
-        if (!this.props.shouldAnimate) return
-        this.setState({currentFrame: nextFrame})
-      }, timeout)
+      this.interval = 1000 / fps
+
+      this.animationId = raf(time => this.animate(nextFrame, time))
     }
+  }
+
+  animate (nextFrame, time) {
+    if (this.unmounting) {
+      return
+    }
+
+    if (!this.prevTime) {
+      this.prevTime = time
+    }
+
+    const delta = time - this.prevTime
+    if (delta < this.interval) {
+      this.animationId = raf(time => this.animate(nextFrame, time))
+      return
+    }
+
+    this.prevTime = time - (delta % this.interval)
+    this.setState({currentFrame: nextFrame})
   }
 
   componentWillReceiveProps ({sprite, reset, startFrame}) {
@@ -105,6 +131,11 @@ class SpriteAnimator extends Component {
       newState.currentFrame = startFrame
     }
     this.setState(newState)
+  }
+
+  componentWillUnmount () {
+    this.unmounting = true
+    this.animationId !== null && raf.cancel(this.animationId)
   }
 
   getSpritePosition (frame = 0, options = {}) {

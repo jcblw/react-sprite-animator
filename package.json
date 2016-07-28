@@ -52,5 +52,8 @@
     "plugins": [
       "transform-es2015-modules-commonjs"
     ]
+  },
+  "dependencies": {
+    "raf": "^3.2.0"
   }
 }

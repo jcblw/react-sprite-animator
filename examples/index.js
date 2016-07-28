@@ -26,7 +26,7 @@ class Sprite extends React.Component {
           height={36}
           sprite='./heart.svg'
           shouldAnimate={isLiked}
-          timeout={20}
+          fps={60}
           startFrame={0}
           stopLastFrame={true}
           reset={!isLiked}
