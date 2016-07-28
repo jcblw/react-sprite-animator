@@ -25,8 +25,9 @@ This is a component that animates through an image sprite.
 
 ### Props
 
-- width **{number}** - width of clipped sprite
-- height **{number}** - height of clipped sprite
+- width **{number}** - width of clipped sprite (original, non-scaled dimensions)
+- height **{number}** - height of clipped sprite (original, non-scaled dimensions)
+- scale **{number}** - scale of the original sprite (default: 1, retina / @2x: 2)
 - sprite **{string}** - path to sprite
 - direction **{string}** - horizontal/vertical
 - shouldAnimate **{bool}** - if the sprite should animate

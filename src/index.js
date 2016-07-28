@@ -9,6 +9,7 @@ const propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   sprite: PropTypes.string,
+  scale: PropTypes.number,
   direction: PropTypes.string,
   shouldAnimate: PropTypes.bool,
   loop: PropTypes.bool,
@@ -20,6 +21,7 @@ const propTypes = {
   onEnd: PropTypes.func
 }
 const defaultProps = {
+  scale: 1,
   direction: 'horizontal',
   shouldAnimate: true,
   loop: true,
@@ -34,7 +36,9 @@ class SpriteAnimator extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      currentFrame: props.startFrame
+      currentFrame: props.startFrame,
+      spriteWidth: 0,
+      spriteHeight: 0
     }
     this.prevTime = 0
     this.unmounting = false
@@ -69,7 +73,9 @@ class SpriteAnimator extends Component {
           maxFrames: Math.floor(direction === 'horizontal' ?
             image.width / width :
             image.height / height
-          )
+          ),
+          spriteWidth: image.width,
+          spriteHeight: image.height
         })
       })
     }
@@ -139,10 +145,10 @@ class SpriteAnimator extends Component {
   }
 
   getSpritePosition (frame = 0, options = {}) {
-    const {direction, width, height} = options
+    const {direction, width, height, scale = 1} = options
     const isHorizontal = direction === 'horizontal'
-    const _width = isHorizontal ?  width * frame : 0
-    const _height = !isHorizontal ? height * frame : 0
+    const _width = (isHorizontal ?  width * frame : 0) / scale
+    const _height = (!isHorizontal ? height * frame : 0) / scale
     return `${!_width ? _width : `-${_width}`}px ${!_height ?  _height : `-${_height}`}px`
   }
 
@@ -153,13 +159,14 @@ class SpriteAnimator extends Component {
   }
 
   render () {
-    const {sprite, width, height, className} = this.props
-    const {isLoaded, currentFrame} = this.state
+    const {sprite, width, height, className, scale} = this.props
+    const {isLoaded, currentFrame, spriteWidth, spriteHeight} = this.state
     const blockStyle = {
       backgroundImage: isLoaded ? `url(${sprite})` : null,
       backgroundPosition: isLoaded ? this.getSpritePosition(currentFrame, this.props) : null,
-      width: `${width}px`,
-      height: `${height}px`
+      backgroundSize: `${spriteWidth / scale}px ${spriteHeight / scale}px`,
+      width: `${width / scale}px`,
+      height: `${height / scale}px`
     }
     return (
       <div className={className} style={blockStyle}></div>
