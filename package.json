@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/jcblw/react-sprite-animator#readme",
   "peerDependencies": {
-    "react": "0.13.x || 0.14.x || ^15.0.0-0"
+    "react": "0.13.x || 0.14.x || ^15.x"
   },
   "devDependencies": {
     "babel": "^6.5.2",
