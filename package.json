@@ -1,6 +1,6 @@
 {
   "name": "react-sprite-animator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A react component that loads sprite image and the runs it as an animation",
   "main": "lib/index.js",
   "scripts": {
