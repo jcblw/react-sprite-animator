@@ -42,7 +42,8 @@
     "tape-run": "^2.1.3"
   },
   "files": [
-    "lib/index.js"
+    "lib/index.js",
+    "LICENSE"
   ],
   "babel": {
     "presets": [
