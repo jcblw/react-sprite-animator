@@ -1,12 +1,12 @@
 # React Sprite Animator
 
-[![Build Status](https://travis-ci.org/RadPad/react-sprite-animator.svg?branch=master)](https://travis-ci.org/RadPad/react-sprite-animator)
+[![Build Status](https://travis-ci.org/jcblw/react-sprite-animator.svg?branch=master)](https://travis-ci.org/jcblw/react-sprite-animator)
 
 This is a component that animates through an image sprite. 
 
 - [Animated Heart Example](http://react-sprite-animator.surge.sh/) 
 
-<img src='https://raw.githubusercontent.com/RadPad/react-sprite-animator/master/examples/padman-go.gif' width='120px' height='134px'>
+<img src='https://raw.githubusercontent.com/jcblw/react-sprite-animator/master/examples/padman-go.gif' width='120px' height='134px'>
 
 
 ### Install
