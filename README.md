@@ -1,5 +1,7 @@
 # React Sprite Animator
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jcblw/react-sprite-animator.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/jcblw/react-sprite-animator.svg?branch=master)](https://travis-ci.org/jcblw/react-sprite-animator)
 
 This is a component that animates through an image sprite. 
