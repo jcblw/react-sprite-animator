@@ -1,7 +1,8 @@
 'use strict'
 
 const React = require('react')
-const {PropTypes, Component} = React
+const {Component} = React
+var PropTypes = require('prop-types')
 const raf = require('raf')
 const noop = () => {}
 const propTypes = {
