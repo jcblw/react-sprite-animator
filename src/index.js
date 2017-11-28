@@ -64,6 +64,9 @@ class SpriteAnimator extends Component {
     const {isLoaded, hasErrored} = this.state
     if (!isLoaded && !hasErrored) {
       SpriteAnimator.loadImage(sprite, (err, image) => {
+        if (this.unmounting) {
+          return
+        }
         if (err) {
           onError(err)
           // dont trigger update
