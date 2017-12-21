@@ -105,6 +105,7 @@ class SpriteAnimator extends Component {
         return
       }
       if (nextFrame === 0 && stopLastFrame) {
+        this.prevTime = 0
         return onEnd()
       }
       this.interval = 1000 / fps
@@ -122,14 +123,18 @@ class SpriteAnimator extends Component {
       this.prevTime = time
     }
 
-    const delta = time - this.prevTime
-    if (delta < this.interval) {
-      this.animationId = raf(time => this.animate(nextFrame, time))
-      return
-    }
+    if (this.props.shouldAnimate) {
+      const delta = time - this.prevTime
+      if (delta < this.interval) {
+        this.animationId = raf(time => this.animate(nextFrame, time))
+        return
+      }
 
-    this.prevTime = time - (delta % this.interval)
-    this.setState({currentFrame: nextFrame})
+      this.prevTime = time - (delta % this.interval)
+      this.setState({currentFrame: nextFrame})
+    } else {
+      this.prevTime = 0
+    }
   }
 
   componentWillReceiveProps ({sprite, reset, startFrame}) {
