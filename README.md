@@ -36,6 +36,8 @@ This is a component that animates through an image sprite.
 - startFrame **{number}** - the frame to start animation
 - fps **{number}** - the frame rate (frames per second) target
 - stopLastFrame **{bool}** - stops animation from looping
+- frame **{number}** - manually sets current frame
+
 
 **Only required for two-dimensional sprites**
 
