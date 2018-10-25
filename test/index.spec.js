@@ -82,3 +82,14 @@ test('SpriteAnimator getSpritePosition will get the correct position of the step
   t.equal(extremeStepTest, '-2000px 0px', 'getSpritePosition produces correct position on a extreme step test with row wrap')
   t.end()
 })
+
+//testing for PR with new frame prop
+
+test('SpriteAnimator change currentFrame state when "frame" prop is present and it has value', function (t) {
+  var spriteAnimator = new SpriteAnimator({frame:20})
+  var frame = spriteAnimator.frame
+  var currentFrame = spriteAnimator.currentFrame
+
+  t.equal(frame, currentFrame, 'currentFrame should get frame value from our props and set it to 20')
+  t.end()
+})
