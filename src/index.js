@@ -21,7 +21,8 @@ const propTypes = {
   onLoad: PropTypes.func,
   onEnd: PropTypes.func,
   frameCount: PropTypes.number,
-  wrapAfter: PropTypes.number
+  wrapAfter: PropTypes.number,
+  frame: PropTypes.number
 }
 const defaultProps = {
   scale: 1,
@@ -137,7 +138,7 @@ class SpriteAnimator extends Component {
     }
   }
 
-  componentWillReceiveProps ({sprite, reset, startFrame}) {
+  componentWillReceiveProps ({sprite, reset, startFrame, frame}) {
     const {sprite: lastSprite} = this.props
     const newState = {}
     if (sprite !== lastSprite) {
@@ -146,6 +147,9 @@ class SpriteAnimator extends Component {
     }
     if (reset) {
       newState.currentFrame = startFrame
+    }
+    if (frame) {
+      newState.currentFrame = frame
     }
     this.setState(newState)
   }
