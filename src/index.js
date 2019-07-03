@@ -1,5 +1,3 @@
-'use strict'
-
 const React = require('react')
 const {Component} = React
 var PropTypes = require('prop-types')
@@ -22,7 +20,8 @@ const propTypes = {
   onEnd: PropTypes.func,
   frameCount: PropTypes.number,
   wrapAfter: PropTypes.number,
-  frame: PropTypes.number
+  frame: PropTypes.number,
+  reset: PropTypes.bool
 }
 const defaultProps = {
   scale: 1,
@@ -70,7 +69,7 @@ class SpriteAnimator extends Component {
         }
         if (err) {
           onError(err)
-          // dont trigger update
+          // eslint-disable-next-line react/no-direct-mutation-state
           this.state.hasErrored = true
           return
         }
