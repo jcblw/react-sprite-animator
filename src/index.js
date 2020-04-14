@@ -96,15 +96,15 @@ class SpriteAnimator extends Component {
       return this.loadSprite()
     }
 
-    const {shouldAnimate, fps, stopLastFrame, onEnd} = this.props
+    const {shouldAnimate, fps, stopLastFrame, onEnd, startFrame} = this.props
     if (shouldAnimate) {
       const {maxFrames, currentFrame} = this.state
-      const nextFrame = currentFrame + 1 >= maxFrames ? 0 : currentFrame + 1
+      const nextFrame = currentFrame + 1 >= maxFrames ? startFrame : currentFrame + 1
 
       if (!shouldAnimate) {
         return
       }
-      if (nextFrame === 0 && stopLastFrame) {
+      if (nextFrame === startFrame && stopLastFrame) {
         this.prevTime = 0
         return onEnd()
       }
