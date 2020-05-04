@@ -1,5 +1,5 @@
 const React = require('react')
-const {Component} = React
+const { Component } = React
 var PropTypes = require('prop-types')
 const raf = require('raf')
 const noop = () => {}
@@ -60,8 +60,16 @@ class SpriteAnimator extends Component {
   }
 
   loadSprite () {
-    const {sprite, width, height, direction, onError, onLoad, frameCount} = this.props
-    const {isLoaded, hasErrored} = this.state
+    const {
+      sprite,
+      width,
+      height,
+      direction,
+      onError,
+      onLoad,
+      frameCount
+    } = this.props
+    const { isLoaded, hasErrored } = this.state
     if (!isLoaded && !hasErrored) {
       SpriteAnimator.loadImage(sprite, (err, image) => {
         if (this.unmounting) {
@@ -76,10 +84,13 @@ class SpriteAnimator extends Component {
         onLoad()
         this.setState({
           isLoaded: true,
-          maxFrames: frameCount || Math.floor(direction === 'horizontal' ?
-            image.width / width :
-            image.height / height
-          ),
+          maxFrames:
+            frameCount ||
+            Math.floor(
+              direction === 'horizontal'
+                ? image.width / width
+                : image.height / height
+            ),
           spriteWidth: image.width,
           spriteHeight: image.height
         })
@@ -96,10 +107,11 @@ class SpriteAnimator extends Component {
       return this.loadSprite()
     }
 
-    const {shouldAnimate, fps, stopLastFrame, onEnd, startFrame} = this.props
+    const { shouldAnimate, fps, stopLastFrame, onEnd, startFrame } = this.props
     if (shouldAnimate) {
-      const {maxFrames, currentFrame} = this.state
-      const nextFrame = currentFrame + 1 >= maxFrames ? startFrame : currentFrame + 1
+      const { maxFrames, currentFrame } = this.state
+      const nextFrame =
+        currentFrame + 1 >= maxFrames ? startFrame : currentFrame + 1
 
       if (!shouldAnimate) {
         return
@@ -131,14 +143,14 @@ class SpriteAnimator extends Component {
       }
 
       this.prevTime = time - (delta % this.interval)
-      this.setState({currentFrame: nextFrame})
+      this.setState({ currentFrame: nextFrame })
     } else {
       this.prevTime = 0
     }
   }
 
-  componentWillReceiveProps ({sprite, reset, startFrame, frame}) {
-    const {sprite: lastSprite} = this.props
+  componentWillReceiveProps ({ sprite, reset, startFrame, frame }) {
+    const { sprite: lastSprite } = this.props
     const newState = {}
     if (sprite !== lastSprite) {
       newState.isLoaded = false
@@ -159,7 +171,7 @@ class SpriteAnimator extends Component {
   }
 
   getSpritePosition (frame = 0, options = {}) {
-    const {direction, width, height, wrapAfter, scale = 1} = options
+    const { direction, width, height, wrapAfter, scale = 1 } = options
     const isHorizontal = direction === 'horizontal'
 
     let row, col
@@ -170,8 +182,8 @@ class SpriteAnimator extends Component {
       row = isHorizontal ? Math.floor(frame / wrapAfter) : frame % wrapAfter
       col = isHorizontal ? frame % wrapAfter : Math.floor(frame / wrapAfter)
     }
-    const _width = -width * col / scale
-    const _height = -height * row / scale
+    const _width = (-width * col) / scale
+    const _height = (-height * row) / scale
     return `${_width}px ${_height}px`
   }
 
@@ -182,18 +194,18 @@ class SpriteAnimator extends Component {
   }
 
   render () {
-    const {sprite, width, height, className, scale} = this.props
-    const {isLoaded, currentFrame, spriteWidth, spriteHeight} = this.state
+    const { sprite, width, height, className, scale } = this.props
+    const { isLoaded, currentFrame, spriteWidth, spriteHeight } = this.state
     const blockStyle = {
       backgroundImage: isLoaded ? `url(${sprite})` : null,
-      backgroundPosition: isLoaded ? this.getSpritePosition(currentFrame, this.props) : null,
+      backgroundPosition: isLoaded
+        ? this.getSpritePosition(currentFrame, this.props)
+        : null,
       backgroundSize: `${spriteWidth / scale}px ${spriteHeight / scale}px`,
       width: `${width / scale}px`,
       height: `${height / scale}px`
     }
-    return (
-      <div className={className} style={blockStyle}></div>
-    )
+    return <div className={className} style={blockStyle}></div>
   }
 }
 
