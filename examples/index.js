@@ -1,6 +1,6 @@
-const React = require('react')
+const React = require('../node_modules/react')
 const ReactDOM = require('react-dom')
-const SpriteAnimator = require('../lib/')
+const { SpriteAnimator } = require('../lib/index.fc')
 
 class Sprite extends React.Component {
   constructor (props) {
@@ -12,19 +12,19 @@ class Sprite extends React.Component {
   }
 
   onClick () {
-    const {isLiked} = this.state
-    this.setState({isLiked: !isLiked})
+    const { isLiked } = this.state
+    this.setState({ isLiked: !isLiked })
   }
 
   render () {
-    const {isLiked} = this.state
+    const { isLiked } = this.state
     return (
       <div onClick={this.onClick}>
         <SpriteAnimator
-          ref='sprite'
+          ref="sprite"
           width={36}
           height={36}
-          sprite='./heart.svg'
+          sprite="./heart.svg"
           shouldAnimate={isLiked}
           fps={60}
           startFrame={0}
@@ -36,4 +36,4 @@ class Sprite extends React.Component {
   }
 }
 
-ReactDOM.render(<Sprite/>, document.getElementById('sprite'))
+ReactDOM.render(<Sprite />, document.getElementById('sprite'))

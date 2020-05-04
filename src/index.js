@@ -21,7 +21,7 @@ const propTypes = {
   frameCount: PropTypes.number,
   wrapAfter: PropTypes.number,
   frame: PropTypes.number,
-  reset: PropTypes.bool
+  reset: PropTypes.bool,
 }
 const defaultProps = {
   scale: 1,
@@ -32,7 +32,7 @@ const defaultProps = {
   fps: 60,
   onError: noop,
   onLoad: noop,
-  onEnd: noop
+  onEnd: noop,
 }
 
 class SpriteAnimator extends Component {
@@ -41,7 +41,7 @@ class SpriteAnimator extends Component {
     this.state = {
       currentFrame: props.startFrame,
       spriteWidth: 0,
-      spriteHeight: 0
+      spriteHeight: 0,
     }
     this.prevTime = 0
     this.unmounting = false
@@ -67,7 +67,7 @@ class SpriteAnimator extends Component {
       direction,
       onError,
       onLoad,
-      frameCount
+      frameCount,
     } = this.props
     const { isLoaded, hasErrored } = this.state
     if (!isLoaded && !hasErrored) {
@@ -92,7 +92,7 @@ class SpriteAnimator extends Component {
                 : image.height / height
             ),
           spriteWidth: image.width,
-          spriteHeight: image.height
+          spriteHeight: image.height,
         })
       })
     }
@@ -189,7 +189,7 @@ class SpriteAnimator extends Component {
 
   reset () {
     this.setState({
-      currentFrame: this.props.startFrame
+      currentFrame: this.props.startFrame,
     })
   }
 
@@ -203,7 +203,7 @@ class SpriteAnimator extends Component {
         : null,
       backgroundSize: `${spriteWidth / scale}px ${spriteHeight / scale}px`,
       width: `${width / scale}px`,
-      height: `${height / scale}px`
+      height: `${height / scale}px`,
     }
     return <div className={className} style={blockStyle}></div>
   }
