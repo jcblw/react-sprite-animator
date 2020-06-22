@@ -1,6 +1,6 @@
 const React = require('react')
 const PropTypes = require('prop-types')
-const { useSpriteAnimator } = require('useSpriteAnimator')
+export const { useSpriteAnimator } = require('./useSpriteAnimator')
 
 const noop = () => {}
 

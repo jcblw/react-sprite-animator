@@ -1,7 +1,7 @@
 const React = require('react')
 const raf = require('raf')
 
-const { caf } = raf
+const { cancel } = raf
 const { useState, useEffect, useCallback } = React
 
 const noop = () => {}
@@ -38,6 +38,7 @@ const useSpriteAnimator = ({
   const [spriteWidth, setSpriteWidth] = useState(0)
   const [spriteHeight, setSpriteHeight] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [hasErrored, setHasErrored] = useState(false)
   const [maxFrames, setMaxFrames] = useState(0)
   const interval = 1000 / fps
@@ -45,7 +46,9 @@ const useSpriteAnimator = ({
   const loadSprite = useCallback(
     url => {
       let unmounted = false
-      if (!isLoaded && !hasErrored) {
+      console.log(isLoading, isLoaded, hasErrored)
+      if (!isLoading && (!isLoaded || !hasErrored)) {
+        setIsLoading(true)
         loadImage(url, (err, image) => {
           if (unmounted) {
             return
@@ -57,6 +60,7 @@ const useSpriteAnimator = ({
           }
           onLoad()
           setIsLoaded(true)
+          setIsLoading(false)
           setMaxFrames(
             frameCount ||
               Math.floor(
@@ -119,7 +123,7 @@ const useSpriteAnimator = ({
     setIsLoaded(false)
     setHasErrored(false)
     return loadSprite(sprite)
-  }, [sprite, loadSprite])
+  }, [sprite])
 
   useEffect(() => {
     if (shouldAnimate) {
@@ -130,14 +134,13 @@ const useSpriteAnimator = ({
         return
       }
       if (nextFrame === startFrame && stopLastFrame) {
-        this.prevTime = 0 // need to store somewhere
         return onEnd()
       }
 
       let id = raf(time => {
         id = animate(nextFrame, time)
       })
-      return () => caf(id)
+      return () => cancel(id)
     }
   }, [shouldAnimate, maxFrames, currentFrame, startFrame])
 

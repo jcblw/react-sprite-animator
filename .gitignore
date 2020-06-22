@@ -3,3 +3,5 @@ node_modules
 lib
 bundle.js
 CNAME
+.cache
+dist
