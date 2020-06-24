@@ -1,6 +1,6 @@
 const React = require('../node_modules/react')
 const ReactDOM = require('../node_modules/react-dom')
-const { SpriteAnimator } = require('../src/index.fc')
+const { SpriteAnimator } = require('../src')
 import heart from './heart.svg'
 
 console.log({ React: React.version, ReactDOM: ReactDOM.version })

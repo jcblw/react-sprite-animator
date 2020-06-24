@@ -1,11 +1,9 @@
-const React = require('react')
-const raf = require('raf')
-
+import { useState, useEffect, useCallback } from 'react'
+import raf from 'raf'
 const { cancel } = raf
-const { useState, useEffect, useCallback } = React
 
 const noop = () => {}
-const loadImage = (url, callback = noop) => {
+export const loadImage = (url, callback = noop) => {
   const img = new Image()
   img.onload = () => {
     callback(null, img)
@@ -16,7 +14,7 @@ const loadImage = (url, callback = noop) => {
   img.src = url
 }
 
-const useSpriteAnimator = ({
+export const useSpriteAnimator = ({
   startFrame = 0,
   sprite,
   width,
@@ -160,5 +158,3 @@ const useSpriteAnimator = ({
     height: `${height / scale}px`,
   }
 }
-
-module.exports = { useSpriteAnimator }

@@ -1,37 +1,13 @@
-var test = require('tape')
-var SpriteAnimator = require('../lib/index.fc')
+const test = require('tape')
+const { SpriteAnimator, loadImage, useSpriteAnimator } = require('../lib')
 
-test('SpriteAnimator.fc is properly exporting', function (t) {
+test('SpriteAnimator is properly exporting', function (t) {
   t.equal(typeof SpriteAnimator, 'function', 'SpriteAnimator is a function')
+  t.equal(typeof loadImage, 'function', 'loadImage is a function')
   t.equal(
-    typeof SpriteAnimator.loadImage,
+    typeof useSpriteAnimator,
     'function',
-    'SpriteAnimator static method loadImage is a function'
-  )
-  t.end()
-})
-
-test('SpriteAnimator.fc is a class and has current api', function (t) {
-  var spriteAnimator = new SpriteAnimator({})
-  t.equal(
-    typeof spriteAnimator,
-    'object',
-    'instance of SpriteAnimator is an object'
-  )
-  t.equal(
-    typeof spriteAnimator.loadSprite,
-    'function',
-    'SpriteAnimator method loadSprite is a function'
-  )
-  t.equal(
-    typeof spriteAnimator.getSpritePosition,
-    'function',
-    'SpriteAnimator method getSpritePosition is a function'
-  )
-  t.equal(
-    typeof spriteAnimator.reset,
-    'function',
-    'SpriteAnimator method reset is a function'
+    'useSpriteAnimator is a function'
   )
   t.end()
 })
@@ -39,34 +15,34 @@ test('SpriteAnimator.fc is a class and has current api', function (t) {
 // need to get PR up for static serving on tape-run for image to load in test
 // to test other states of loadSprite
 
-test('SpriteAnimator.fc loadSprite will error when no valid sprite is passed', function (t) {
+test('SpriteAnimator loadSprite will error when no valid sprite is passed', function (t) {
   var props = {
     onError: function (err) {
       t.equal(typeof err, 'object', 'onError is called with error object')
       t.end()
     },
-    sprite: ''
+    sprite: '',
   }
   var spriteAnimator = new SpriteAnimator(props)
   spriteAnimator.loadSprite()
 })
 
-test('SpriteAnimator.fc getSpritePosition will get the correct position of the step for a horizontal direction', function (t) {
+test('SpriteAnimator getSpritePosition will get the correct position of the step for a horizontal direction', function (t) {
   var spriteAnimator = new SpriteAnimator({})
   var basicTest = spriteAnimator.getSpritePosition(0, {
     width: 10,
     height: 10,
-    direction: 'horizontal'
+    direction: 'horizontal',
   })
   var anotherStepTest = spriteAnimator.getSpritePosition(1, {
     width: 10,
     height: 10,
-    direction: 'horizontal'
+    direction: 'horizontal',
   })
   var extremeStepTest = spriteAnimator.getSpritePosition(1000, {
     width: 10,
     height: 10,
-    direction: 'horizontal'
+    direction: 'horizontal',
   })
   t.equal(
     basicTest,
@@ -86,22 +62,22 @@ test('SpriteAnimator.fc getSpritePosition will get the correct position of the s
   t.end()
 })
 
-test('SpriteAnimator.fc getSpritePosition will get the correct position of the step for a vertical direction', function (t) {
+test('SpriteAnimator getSpritePosition will get the correct position of the step for a vertical direction', function (t) {
   var spriteAnimator = new SpriteAnimator({})
   var basicTest = spriteAnimator.getSpritePosition(0, {
     width: 10,
     height: 10,
-    direction: 'vertical'
+    direction: 'vertical',
   })
   var anotherStepTest = spriteAnimator.getSpritePosition(1, {
     width: 10,
     height: 10,
-    direction: 'vertical'
+    direction: 'vertical',
   })
   var extremeStepTest = spriteAnimator.getSpritePosition(1000, {
     width: 10,
     height: 10,
-    direction: 'vertical'
+    direction: 'vertical',
   })
   t.equal(
     basicTest,
@@ -121,37 +97,37 @@ test('SpriteAnimator.fc getSpritePosition will get the correct position of the s
   t.end()
 })
 
-test('SpriteAnimator.fc getSpritePosition will get the correct position of the step for a horizontal direction with wrapAfter', function (t) {
+test('SpriteAnimator getSpritePosition will get the correct position of the step for a horizontal direction with wrapAfter', function (t) {
   var spriteAnimator = new SpriteAnimator({})
   var basicTest = spriteAnimator.getSpritePosition(0, {
     width: 10,
     height: 10,
     direction: 'horizontal',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   var anotherStepTest = spriteAnimator.getSpritePosition(1, {
     width: 10,
     height: 10,
     direction: 'horizontal',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   var wrapStepTest = spriteAnimator.getSpritePosition(8, {
     width: 10,
     height: 10,
     direction: 'horizontal',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   var biggerWrapStepTest = spriteAnimator.getSpritePosition(12, {
     width: 10,
     height: 10,
     direction: 'horizontal',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   var extremeStepTest = spriteAnimator.getSpritePosition(1000, {
     width: 10,
     height: 10,
     direction: 'horizontal',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   t.equal(
     basicTest,
@@ -181,37 +157,37 @@ test('SpriteAnimator.fc getSpritePosition will get the correct position of the s
   t.end()
 })
 
-test('SpriteAnimator.fc getSpritePosition will get the correct position of the step for a vertical direction with wrapAfter', function (t) {
+test('SpriteAnimator getSpritePosition will get the correct position of the step for a vertical direction with wrapAfter', function (t) {
   var spriteAnimator = new SpriteAnimator({})
   var basicTest = spriteAnimator.getSpritePosition(0, {
     width: 10,
     height: 10,
     direction: 'vertical',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   var anotherStepTest = spriteAnimator.getSpritePosition(1, {
     width: 10,
     height: 10,
     direction: 'vertical',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   var wrapStepTest = spriteAnimator.getSpritePosition(8, {
     width: 10,
     height: 10,
     direction: 'vertical',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   var biggerWrapStepTest = spriteAnimator.getSpritePosition(12, {
     width: 10,
     height: 10,
     direction: 'vertical',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   var extremeStepTest = spriteAnimator.getSpritePosition(1000, {
     width: 10,
     height: 10,
     direction: 'vertical',
-    wrapAfter: 5
+    wrapAfter: 5,
   })
   t.equal(
     basicTest,
@@ -243,7 +219,7 @@ test('SpriteAnimator.fc getSpritePosition will get the correct position of the s
 
 //testing for PR with new frame prop
 
-test('SpriteAnimator.fc change currentFrame state when "frame" prop is present and it has value', function (t) {
+test('SpriteAnimator change currentFrame state when "frame" prop is present and it has value', function (t) {
   var spriteAnimator = new SpriteAnimator({ frame: 20 })
   var frame = spriteAnimator.frame
   var currentFrame = spriteAnimator.currentFrame

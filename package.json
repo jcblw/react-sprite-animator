@@ -5,9 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint ./{src,test}/*.js",
-    "test": "npm run lint && npm run compile && browserify test/*.js | tape-run",
-    "compile": "babel src --stage 0 --modules common --out-dir lib",
-    "watch": "babel src --stage 0 --modules common --out-dir lib --watch",
+    "test": "npm run lint && jest",
+    "compile": "babel src -d lib",
+    "watch": "babel -d lib --watch",
     "prepublish": "npm run compile"
   },
   "repository": {
@@ -30,21 +30,19 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-cli": "^6.5.1",
-    "babel-core": "^6.5.2",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.5.2",
-    "babel-preset-es2015": "^6.5.0",
-    "babel-preset-react": "^6.5.0",
-    "browserify": "^16.5.0",
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-react": "^7.10.1",
+    "@testing-library/react": "^10.4.1",
     "eslint": "^6.0.1",
     "eslint-plugin-react": "^7.14.2",
-    "prop-types": "^15.7.2",
+    "jest": "^26.1.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "react-addons-test-utils": "^15.0.1",
-    "tape": "^4.11.0",
-    "tape-run": "^6.0.0"
+    "react-dom": "^16.13.1",
+    "react-test-renderer": "^16.13.1"
   },
   "files": [
     "lib/index.js",
@@ -52,14 +50,21 @@
   ],
   "babel": {
     "presets": [
-      "es2015",
-      "react"
+      "@babel/preset-react",
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry"
+        }
+      ]
     ],
     "plugins": [
-      "transform-es2015-modules-commonjs"
+      "@babel/plugin-transform-modules-commonjs"
     ]
   },
   "dependencies": {
+    "prop-types": "^15.7.2",
     "raf": "^3.2.0"
-  }
+  },
+  "browserslist": "> 0.25%, not dead"
 }
