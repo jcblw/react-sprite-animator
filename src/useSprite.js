@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 
 const noop = () => {}
 export const loadImage = (url, callback = noop) => {
@@ -29,6 +29,7 @@ export const useSprite = ({
   scale = 1,
   wrapAfter,
 }) => {
+  const prevTime = useRef()
   const [currentFrame, setCurrentFrame] = useState(startFrame)
   const [spriteWidth, setSpriteWidth] = useState(0)
   const [spriteHeight, setSpriteHeight] = useState(0)
@@ -72,23 +73,22 @@ export const useSprite = ({
     [sprite, isLoaded, hasErrored]
   )
 
-  let prevTime = 0
   const animate = useCallback(
     (nextFrame, time) => {
-      if (!prevTime) {
-        prevTime = time
+      if (!prevTime.current) {
+        prevTime.current = time
       }
 
       if (shouldAnimate) {
-        const delta = time - prevTime
+        const delta = time - prevTime.current
         if (delta < interval) {
           return requestAnimationFrame(time => animate(nextFrame, time))
         }
 
-        prevTime = time - (delta % interval)
+        prevTime.current = time - (delta % interval)
         setCurrentFrame(nextFrame)
       } else {
-        prevTime = 0
+        prevTime.current = 0
       }
     },
     [shouldAnimate]
@@ -130,8 +130,6 @@ export const useSprite = ({
       if (nextFrame === startFrame && stopLastFrame) {
         return onEnd()
       }
-
-      // console.log('animating')
 
       let id = requestAnimationFrame(time => {
         id = animate(nextFrame, time)

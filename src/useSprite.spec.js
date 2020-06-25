@@ -51,7 +51,7 @@ describe('useSprite hook', () => {
         sprite: heart,
         width: 36,
         height,
-        fps: 120,
+        fps: 1000,
       })
     )
 
@@ -68,30 +68,27 @@ describe('useSprite hook', () => {
     expect(result.current.backgroundSize).toBe(`${width}px ${height}px`)
 
     act(() => {
-      // step into initial animation
-      rafMock.current.triggerNextAnimationFrame(performance.now() - 1000)
-      rafMock.current.triggerNextAnimationFrame()
+      // step into initial animation set time back
+      rafMock.current.triggerNextAnimationFrame(performance.now() - 5)
+      rafMock.current.triggerNextAnimationFrame(performance.now() + 10)
     })
 
     expect(result.current.backgroundPosition).toBe('-36px 0px')
 
     act(() => {
       // TODO need a more consistent way to trigger this
-      rafMock.current.triggerNextAnimationFrame()
-      rafMock.current.triggerNextAnimationFrame()
-      rafMock.current.triggerNextAnimationFrame()
+      rafMock.current.triggerNextAnimationFrame(performance.now() + 20)
     })
 
     expect(result.current.backgroundPosition).toBe(`-${36 * 2}px 0px`)
 
     act(() => {
-      rafMock.current.triggerNextAnimationFrame(performance.now() - 1000)
-      rafMock.current.triggerNextAnimationFrame()
+      rafMock.current.triggerNextAnimationFrame(performance.now() + 30)
     })
 
     expect(result.current.backgroundPosition).toBe('0px 0px')
   })
-  // test frame animation
+
   // test differnt orientation frame animation
   // test wrap
   // test start frame
