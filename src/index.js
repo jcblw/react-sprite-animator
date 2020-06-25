@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useSpriteAnimator } from './useSpriteAnimator'
-export { useSpriteAnimator, loadImage } from './useSpriteAnimator'
+import { useSprite } from './useSprite'
+export { useSprite, loadImage } from './useSprite'
 
 const noop = () => {}
 
@@ -45,7 +45,7 @@ export const SpriteAnimator = ({
   scale,
   wrapAfter,
 }) => {
-  const style = useSpriteAnimator({
+  const style = useSprite({
     startFrame,
     sprite,
     width,

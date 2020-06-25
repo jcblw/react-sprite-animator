@@ -1,6 +1,4 @@
 import { useState, useEffect, useCallback } from 'react'
-import raf from 'raf'
-const { cancel } = raf
 
 const noop = () => {}
 export const loadImage = (url, callback = noop) => {
@@ -14,7 +12,7 @@ export const loadImage = (url, callback = noop) => {
   img.src = url
 }
 
-export const useSpriteAnimator = ({
+export const useSprite = ({
   startFrame = 0,
   sprite,
   width,
@@ -28,7 +26,6 @@ export const useSpriteAnimator = ({
   shouldAnimate = true,
   stopLastFrame,
   reset,
-  frame,
   scale = 1,
   wrapAfter,
 }) => {
@@ -44,7 +41,6 @@ export const useSpriteAnimator = ({
   const loadSprite = useCallback(
     url => {
       let unmounted = false
-      console.log(isLoading, isLoaded, hasErrored)
       if (!isLoading && (!isLoaded || !hasErrored)) {
         setIsLoading(true)
         loadImage(url, (err, image) => {
@@ -76,17 +72,17 @@ export const useSpriteAnimator = ({
     [sprite, isLoaded, hasErrored]
   )
 
-  let prevTime
+  let prevTime = 0
   const animate = useCallback(
     (nextFrame, time) => {
-      if (prevTime) {
+      if (!prevTime) {
         prevTime = time
       }
 
       if (shouldAnimate) {
         const delta = time - prevTime
         if (delta < interval) {
-          return raf(time => animate(nextFrame, time))
+          return requestAnimationFrame(time => animate(nextFrame, time))
         }
 
         prevTime = time - (delta % interval)
@@ -135,20 +131,20 @@ export const useSpriteAnimator = ({
         return onEnd()
       }
 
-      let id = raf(time => {
+      // console.log('animating')
+
+      let id = requestAnimationFrame(time => {
         id = animate(nextFrame, time)
       })
-      return () => cancel(id)
+      return () => {
+        cancelAnimationFrame(id)
+      }
     }
   }, [shouldAnimate, maxFrames, currentFrame, startFrame])
 
   useEffect(() => {
     setCurrentFrame(startFrame)
   }, [reset])
-
-  useEffect(() => {
-    setCurrentFrame(frame)
-  }, [frame])
 
   return {
     backgroundImage: isLoaded ? `url(${sprite})` : null,

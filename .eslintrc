@@ -23,7 +23,8 @@
     "ecmaFeatures": {
       "modules": true,
       "jsx": true
-    }
+    },
+    "ecmaVersion": 2019
   },
   "settings": {
     "react": {
@@ -34,6 +35,8 @@
     "describe": true,
     "it": true,
     "jest": true,
-    "expect": true
+    "expect": true,
+    "beforeEach": true,
+    "afterEach": true
   }
 }
