@@ -6,20 +6,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-
+      - name: Install Dependencies
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
       - run: npm install yarn --global
       - name: Install Yarn
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-
-      - name: Install Dependencies
+      - run: yarn
+      - name: Yarn install
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: yarn
-
+      - run: yarn test
       - name: Test Code
         uses: actions/setup-node@v1
         with:
-          args: yarn test
+          node-version: '12.x'
