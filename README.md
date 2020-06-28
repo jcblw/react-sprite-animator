@@ -1,8 +1,6 @@
 # React Sprite Animator
 
-![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=jcblw/dependabot)
-
-[![Build Status](https://travis-ci.org/jcblw/react-sprite-animator.svg?branch=master)](https://travis-ci.org/jcblw/react-sprite-animator)
+![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=jcblw/react-sprite-animator)
 
 This is a component that animates through an image sprite.
 
