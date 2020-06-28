@@ -1,6 +1,5 @@
 node_modules
 *.log
-lib
 bundle.js
 CNAME
 .cache

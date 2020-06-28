@@ -1,6 +1,6 @@
 # React Sprite Animator
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/jcblw/react-sprite-animator.svg)](https://greenkeeper.io/)
+![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=jcblw/dependabot)
 
 [![Build Status](https://travis-ci.org/jcblw/react-sprite-animator.svg?branch=master)](https://travis-ci.org/jcblw/react-sprite-animator)
 
