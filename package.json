@@ -41,7 +41,7 @@
     "prop-types": "^15.7.2",
     "react-addons-test-utils": "^15.0.1",
     "tape": "^4.11.0",
-    "tape-run": "^6.0.0"
+    "tape-run": "^7.0.0"
   },
   "files": [
     "lib/index.js",
