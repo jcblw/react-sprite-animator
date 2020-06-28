@@ -10,18 +10,18 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: npm install yarn --global
       - name: Install Yarn
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: yarn
+        run: npm install yarn --global
       - name: Yarn install
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: yarn test
+        run: yarn
       - name: Test Code
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+        run: yarn test
