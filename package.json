@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint src/*.js",
-    "test": "npm run lint && jest",
+    "test": "npm run lint && jest --coverage",
     "compile": "babel src -d lib",
     "watch": "babel -d lib --watch",
     "prepublish": "npm run compile"

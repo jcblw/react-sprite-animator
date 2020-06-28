@@ -5,3 +5,4 @@ bundle.js
 CNAME
 .cache
 dist
+coverage
