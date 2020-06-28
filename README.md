@@ -1,31 +1,60 @@
 # React Sprite Animator
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/jcblw/react-sprite-animator.svg)](https://greenkeeper.io/)
+![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=jcblw/dependabot)
 
 [![Build Status](https://travis-ci.org/jcblw/react-sprite-animator.svg?branch=master)](https://travis-ci.org/jcblw/react-sprite-animator)
 
-This is a component that animates through an image sprite. 
+This is a component that animates through an image sprite.
 
-- [Animated Heart Example](http://react-sprite-animator.surge.sh/) 
+- [Animated Heart Example](http://react-sprite-animator.surge.sh/)
 
 <img src='https://raw.githubusercontent.com/jcblw/react-sprite-animator/master/examples/padman-go.gif' width='120px' height='134px'>
 
-
 ### Install
 
-    $ npm i react-sprite-animator -S
+```shell
+npm i react-sprite-animator -S
+# or
+yarn add react-sprite-animator
+```
+
+**React** is used with this library but do not come bundled with this library. Please make sure you have those installed before using.
 
 ### Usage
 
-```html
+You are able to use this library as a component or as a hook.
+
+#### The component
+
+```javascript
+import { SpriteAnimator } from 'react-sprite-animator'
+...
 <SpriteAnimator
-  sprite='/path-to/sprite.svg'
+  sprite="/path-to/sprite.svg"
   width={100}
   height={100}
 />
 ```
 
+#### The hook
+
+```javascript
+import { useSprite } from 'react-sprite-animator'
+
+const MyComponent = () => {
+  const styles = useSprite({
+    sprite: '/path-to/sprite.svg',
+    width: 100,
+    height: 100,
+  })
+
+  return <div style={style} />
+}
+```
+
 ### Props
+
+This is the same for the hooks options and the props of the component.
 
 - width **{number}** - width of clipped sprite (original, non-scaled dimensions)
 - height **{number}** - height of clipped sprite (original, non-scaled dimensions)
@@ -37,7 +66,6 @@ This is a component that animates through an image sprite.
 - fps **{number}** - the frame rate (frames per second) target
 - stopLastFrame **{bool}** - stops animation from looping
 - frame **{number}** - manually sets current frame
-
 
 **Only required for two-dimensional sprites**
 

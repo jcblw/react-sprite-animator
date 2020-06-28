@@ -5,18 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify index.js -t babelify -o bundle.js",
-    "publish": "npm run build && echo 'react-sprite-animator.surge.sh' > ./CNAME && surge ."
+    "start": "parcel index.html"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "parcel": "^1.12.4",
     "surge": "^0.17.7"
   }
 }
