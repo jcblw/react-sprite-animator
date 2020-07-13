@@ -218,5 +218,37 @@ describe('useSprite hook', () => {
 
       expect(result.current.backgroundPosition).toBe('0px 0px')
     })
+    it('should call onEnd only at the end of an animation', async () => {
+      const width = 36 * 2
+      const height = 36
+      const imageMock = createImageMock({ width, height })
+      const onEnd = jest.fn()
+      const rafMock = createRafMock()
+      renderHook(() =>
+        useSprite({
+          startFrame: 0,
+          sprite: heart,
+          width: 36,
+          height: 36,
+          fps: 1000,
+          stopLastFrame: true,
+          onEnd,
+        })
+      )
+
+      act(() => {
+        imageMock.current.triggerLoad()
+      })
+
+      expect(onEnd).not.toBeCalled()
+
+      act(() => {
+        // step into initial animation set time back
+        rafMock.current.triggerNextAnimationFrame(performance.now() - 5)
+        rafMock.current.triggerNextAnimationFrame(performance.now() + 10)
+      })
+
+      expect(onEnd).toBeCalled()
+    })
   })
 })
