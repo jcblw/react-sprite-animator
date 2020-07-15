@@ -2,7 +2,7 @@ on: pull_request
 name: Test Workflow
 jobs:
   installDependencies:
-    name: Lint & Test
+    name: Pull request requirments
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
