@@ -127,7 +127,7 @@ export const useSprite = ({
       if (!shouldAnimate) {
         return
       }
-      if (nextFrame === startFrame && stopLastFrame) {
+      if (currentFrame === maxFrames - 1 && stopLastFrame) {
         return onEnd()
       }
 
