@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.10.3",
     "@babel/preset-react": "^7.10.1",
     "@testing-library/react": "^11.0.4",
-    "@testing-library/react-hooks": "^3.3.0",
+    "@testing-library/react-hooks": "^7.0.1",
     "eslint": "^7",
     "eslint-plugin-react": "^7.14.2",
     "jest": "^26.1.0",
