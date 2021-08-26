@@ -28,6 +28,7 @@ export const useSprite = ({
   reset,
   scale = 1,
   wrapAfter,
+  frame
 }) => {
   const prevTime = useRef()
   const [currentFrame, setCurrentFrame] = useState(startFrame)
@@ -143,6 +144,12 @@ export const useSprite = ({
   useEffect(() => {
     setCurrentFrame(startFrame)
   }, [reset])
+
+  useEffect(() => {
+    if (Number.isInteger(frame)) {
+      setCurrentFrame(frame);
+    }
+  }, [frame]);
 
   return {
     backgroundImage: isLoaded ? `url(${sprite})` : null,
