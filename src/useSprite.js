@@ -146,7 +146,7 @@ export const useSprite = ({
   }, [reset])
 
   useEffect(() => {
-    if (Number.isInteger(frame)) {
+    if (typeof frame === 'number' && frame !== currentFrame) {
       setCurrentFrame(frame);
     }
   }, [frame]);
