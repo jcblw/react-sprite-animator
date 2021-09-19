@@ -147,9 +147,9 @@ export const useSprite = ({
 
   useEffect(() => {
     if (typeof frame === 'number' && frame !== currentFrame) {
-      setCurrentFrame(frame);
+      setCurrentFrame(frame)
     }
-  }, [frame]);
+  }, [frame])
 
   return {
     backgroundImage: isLoaded ? `url(${sprite})` : null,
